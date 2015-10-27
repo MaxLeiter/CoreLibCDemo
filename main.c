@@ -17,6 +17,7 @@ void main_menu() {
 		draw_string(screen, 0, 25, "		1: showPrompt");
 		draw_string(screen, 0, 31, "		2: drawWindow");
 		draw_string(screen, 0, 37, "		3: showMessage");
+		draw_string(screen, 0, 43, "		4: drawScrollbar");
 
 		screen_draw(screen);
 		key = app_get_key(&_);
@@ -35,6 +36,12 @@ void main_menu() {
 			case KEY_3:
 				show_message(screen, "message", "   list", 0);
 				break;
+			case KEY_4:
+				screen_clear(screen);
+				draw_window(screen, "title", 0);
+				draw_string(screen, 38, 40, "Look there -->");
+				draw_scrollbar(screen, 30, 15);
+				screen_draw(screen);
 			}
 
 		ksleep(5);
