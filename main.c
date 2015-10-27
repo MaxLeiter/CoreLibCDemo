@@ -19,7 +19,7 @@ void main_menu() {
 		draw_string(screen, 0, 37, "		3: showMessage");
 		draw_string(screen, 0, 43, "		4: drawScrollbar");
 		draw_string(screen, 0, 49, "		5: drawTabs");
-
+		draw_string(screen, 0, 55, "		6: showMenu");
 		screen_draw(screen);
 		key = app_get_key(&_);
 		switch(key) {
@@ -28,7 +28,7 @@ void main_menu() {
 			case KEY_MODE:
 				break;
 			case KEY_1:
-				message = prompt_string(screen, "Preset msg", 12, "enter string");
+				message = prompt_string(screen, "Message", 7, "Enter string");
 				message = 0;
 				break;
 			case KEY_2:
@@ -52,6 +52,12 @@ void main_menu() {
 				screen_clear(screen);
 				draw_window(screen, "title", 0);
 				draw_tabs(screen, "\x04Info\x00 Tasks\x00 RAM\x00 Flash\x00", 0);
+				screen_draw(screen);
+				break;
+			case KEY_6:
+				screen_clear(screen);
+				draw_window(screen, "title", 0x02);
+				show_menu(screen, "\x03Info\x00Tasks\x00RAM\x00", 40);
 				screen_draw(screen);
 				break;
 			}
