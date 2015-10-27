@@ -18,6 +18,7 @@ void main_menu() {
 		draw_string(screen, 0, 31, "		2: drawWindow");
 		draw_string(screen, 0, 37, "		3: showMessage");
 		draw_string(screen, 0, 43, "		4: drawScrollbar");
+		draw_string(screen, 0, 49, "		5: drawTabs");
 
 		screen_draw(screen);
 		key = app_get_key(&_);
@@ -28,13 +29,17 @@ void main_menu() {
 				break;
 			case KEY_1:
 				message = prompt_string(screen, "Preset msg", 12, "enter string");
+				message = 0;
+				break;
 			case KEY_2:
 				screen_clear(screen);
 				draw_window(screen, "title", 0);
 				screen_draw(screen);
 				break;
 			case KEY_3:
-				show_message(screen, "message", "   list", 0);
+				screen_clear(screen);
+				show_message(screen, "Some options below", "\x02Option 1\x00Option 2\x00", 0);
+				screen_draw(screen);
 				break;
 			case KEY_4:
 				screen_clear(screen);
@@ -42,6 +47,13 @@ void main_menu() {
 				draw_string(screen, 38, 40, "Look there -->");
 				draw_scrollbar(screen, 30, 15);
 				screen_draw(screen);
+				break;
+			case KEY_5:
+				screen_clear(screen);
+				draw_window(screen, "title", 0);
+				draw_tabs(screen, "\x04Info\x00 Tasks\x00 RAM\x00 Flash\x00", 0);
+				screen_draw(screen);
+				break;
 			}
 
 		ksleep(5);
