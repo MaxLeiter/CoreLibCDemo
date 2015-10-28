@@ -13,13 +13,15 @@ void main_menu() {
 		unsigned char message;
 		flush_keys();
 		screen_clear(screen);
-		draw_string(screen, 0, 0, "Hello! This is a demo \nshowing how to use the \ncorelib library in C. \n Commands: \n");
-		draw_string(screen, 0, 25, "		1: showPrompt");
-		draw_string(screen, 0, 31, "		2: drawWindow");
-		draw_string(screen, 0, 37, "		3: showMessage");
-		draw_string(screen, 0, 43, "		4: drawScrollbar");
-		draw_string(screen, 0, 49, "		5: drawTabs");
-		draw_string(screen, 0, 55, "		6: showMenu");
+		draw_string(screen, 0, 0, "Hello! This is a demo \nshowing how to use the \ncorelib library in C.");
+		draw_string(screen, 0, 21, "		1: showPrompt");
+		draw_string(screen, 0, 27, "		2: drawWindow");
+		draw_string(screen, 0, 33, "		3: showMessage");
+		draw_string(screen, 0, 39, "		4: drawScrollbar");
+		draw_string(screen, 0, 45, "		5: drawTabs");
+		draw_string(screen, 0, 51, "		6: showMenu");
+		draw_string(screen, 0, 57, "		7: showError");
+
 		screen_draw(screen);
 		key = app_get_key(&_);
 		switch(key) {
@@ -58,6 +60,11 @@ void main_menu() {
 				screen_clear(screen);
 				draw_window(screen, "title", 0x02);
 				show_menu(screen, "\x03Info\x00Tasks\x00RAM\x00", 40);
+				screen_draw(screen);
+				break;
+			case KEY_7:
+				screen_clear(screen);
+				show_error(screen, ERR_TOO_MANY_THREADS);
 				screen_draw(screen);
 				break;
 			}
