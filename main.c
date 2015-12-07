@@ -10,7 +10,7 @@ SCREEN *screen;
 void filesystem_status();
 /** Filesystem things**/
 bool error_one;
-bool error_two;
+unsigned char error_two;
 bool error_three;
 
 void main_menu() {
