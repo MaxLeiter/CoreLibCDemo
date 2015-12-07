@@ -4,10 +4,12 @@
 #include <knightos/filesystem.h>
 #include <corelib.h>
 #include <stdbool.h>
+#include <errno.h>
+
 SCREEN *screen;
+void filesystem_status();
 /** Filesystem things**/
-struct flash_ptr address; //char *address, page
-unsigned short error_one;
+bool error_one;
 bool error_two;
 bool error_three;
 
@@ -20,13 +22,13 @@ void main_menu() {
 		flush_keys();
 		screen_clear(screen);
 		draw_string(screen, 0, 0, "		1: showPrompt");
-		draw_string(screen, 0, 6, "		3: drawWindow");
-		draw_string(screen, 0, 12, "		4: showMessage");
-		draw_string(screen, 0, 18, "		5: drawScrollbar");
-		draw_string(screen, 0, 24, "		6: drawTabs");
-		draw_string(screen, 0, 30, "		7: showMenu");
-		draw_string(screen, 0, 36, "		8: showError");
-		draw_string(screen, 0, 42, "		9: filesystem status");
+		draw_string(screen, 0, 6, "		2: drawWindow");
+		draw_string(screen, 0, 12, "		3: showMessage");
+		draw_string(screen, 0, 18, "		4: drawScrollbar");
+		draw_string(screen, 0, 24, "		5: drawTabs");
+		draw_string(screen, 0, 30, "		6: showMenu");
+		draw_string(screen, 0, 36, "		7: showError");
+		draw_string(screen, 0, 42, "		8: filesystem status");
 
 		screen_draw(screen);
 		key = app_get_key(&_);
@@ -45,9 +47,7 @@ void main_menu() {
 				screen_draw(screen);
 				break;
 			case KEY_3:
-				screen_clear(screen);
-				show_message(screen, "Some options below", "\x02Option 1\x00Option 2\x00", 0);
-				screen_draw(screen);
+				launch_castle();
 				break;
 			case KEY_4:
 				screen_clear(screen);
@@ -94,18 +94,19 @@ void main() {
 }
 
 void filesystem_status() {
-	draw_string(screen, 0, 0, "Bin dir exist: ");
-	draw_string(screen, 0, 12, "Test dir work: ");
+	draw_string(screen, 0, 0, "Test dir exist: ");
+	draw_string(screen, 0, 12, "Create test dir: ");
 	draw_string(screen, 0, 24, "Test dir exist: ");
-	draw_string(screen, 0, 36, "Test dir page/address: ");
+	draw_string(screen, 0, 36, "Create dir errno: ");
 
-	error_two = directory_exists("/bin");
-	error_one = create_directory("/test", &address);
+	error_one = directory_exists("/test");
+	error_two = create_directory("/test");
 	error_three = directory_exists("/test");
 
-	draw_byte(screen, 10, 6, error_two);
-	draw_short(screen, 10, 18, error_one);
-	draw_byte(screen, 10, 30, error_three);
-	draw_byte(screen, 10, 42, address.page);
-	draw_short(screen, 25, 42, (short) address.address);
+	draw_byte(screen, 10, 5, error_one);
+	draw_byte(screen, 10, 17, error_two);
+	draw_byte(screen, 10, 29, error_three);
+
+	draw_byte(screen, 10, 41, errno);
+
 }

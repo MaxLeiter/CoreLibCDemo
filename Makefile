@@ -1,6 +1,5 @@
 include .knightos/variables.make
 HEADERS:=$(wildcard *.h)
-
 ALL_TARGETS:=$(BIN)corelibcdemo $(APPS)corelibcdemo.app $(SHARE)icons/corelibcdemo.img
 
 $(BIN)corelibcdemo: $(OUT)main.o $(OUT)crt0.o
