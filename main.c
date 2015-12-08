@@ -10,7 +10,7 @@ SCREEN *screen;
 void filesystem_status();
 /** Filesystem things**/
 bool error_one;
-unsigned char error_two;
+bool error_two;
 bool error_three;
 
 void main_menu() {
@@ -99,9 +99,9 @@ void filesystem_status() {
 	draw_string(screen, 0, 24, "Test dir exist: ");
 	draw_string(screen, 0, 36, "Create dir errno: ");
 
-	error_one = directory_exists("/test");
-	error_two = create_directory("/test");
-	error_three = directory_exists("/test");
+	error_one = directory_exists("/asde");
+	error_two = create_directory("/asde");
+	error_three = directory_exists("/asde");
 
 	draw_byte(screen, 10, 5, error_one);
 	draw_byte(screen, 10, 17, error_two);
