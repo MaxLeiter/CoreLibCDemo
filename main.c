@@ -70,7 +70,7 @@ void main_menu() {
 				break;
 			case KEY_7:
 				screen_clear(screen);
-				show_error(screen, ERR_TOO_MANY_THREADS);
+				show_error(screen, E_TOO_MANY_THREADS);
 				screen_draw(screen);
 				break;
 			case KEY_8:
